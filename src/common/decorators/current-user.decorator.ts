@@ -1,0 +1,15 @@
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { FastifyRequest, RouteGenericInterface } from 'fastify';
+import { Store, User } from 'src/generated/client';
+
+export type CurrentUserType = User & { store: Store | null };
+
+export const CurrentUser = createParamDecorator<keyof CurrentUserType | undefined>((data: keyof CurrentUserType | undefined, ctx: ExecutionContext) => {
+  const request = ctx.switchToHttp().getRequest<FastifyRequest<RouteGenericInterface>>();
+  const user = request?.["user"] as CurrentUserType;
+
+  if (data) {
+    return user?.[data];
+  }
+  return user;
+});
