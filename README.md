@@ -293,21 +293,7 @@ This project is licensed under the UNLICENSED License - see the package.json fil
 
 ## 👨‍💻 Author
 
-**MohamedSa-dev**
-
----
-
-## 🔮 Planned Features
-
-The project structure includes imports for additional modules that are planned for future implementation:
-
-- **Files Module**: File upload and management
-- **Products Module**: Product catalog management
-- **Stores Module**: Multi-tenant store system
-- **Payments Module**: Payment processing integration
-- **Activities Module**: User activity tracking and logging
-
-These modules are referenced in the main app module but not yet implemented, providing a roadmap for future development.
+**MohamedSaeed-dev**
 
 ---
 
