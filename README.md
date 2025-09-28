@@ -1,98 +1,314 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS Fastify Prisma Starter
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A high-performance, production-ready backend starter template built with **NestJS**, **Fastify**, and **Prisma**. This project provides a robust foundation for building scalable web applications with modern TypeScript architecture.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+### Core Technologies
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **[NestJS](https://nestjs.com/)** - Progressive Node.js framework with TypeScript support
+- **[Fastify](https://www.fastify.io/)** - Fast and low overhead web framework (alternative to Express)
+- **[Prisma](https://www.prisma.io/)** - Next-generation ORM with type safety
+- **[PostgreSQL](https://www.postgresql.org/)** - Robust relational database
 
-## Project setup
+### Architecture & Performance
 
-```bash
-$ npm install
+- ⚡ **High Performance**: Fastify adapter for superior performance over Express
+- 🔒 **Security First**: Helmet, CORS, CSP, and security best practices
+- 📦 **Compression**: Built-in gzip/brotli compression
+- 🎯 **Type Safety**: Full TypeScript support with Prisma generated types
+- 🔄 **Hot Reload**: Development mode with automatic restart
+- 📊 **Logging**: Winston logger integration with structured logging
+
+### Authentication & Authorization
+
+- 🔐 **JWT Authentication**: Secure token-based authentication
+- 👥 **Role-Based Access Control (RBAC)**: Admin, Seller, Buyer roles
+- 🛡️ **Guards & Decorators**: Custom guards for route protection
+- 📝 **Validation**: Class-validator with comprehensive DTOs
+
+### Database & ORM
+
+- 🗃️ **Prisma ORM**: Type-safe database access
+- 🔄 **Migrations**: Database schema versioning
+- 🌱 **Seeders**: Pre-populated test data
+- 📈 **Optimizations**: Prisma extensions for performance
+
+### Development Experience
+
+- 🧪 **Testing**: Jest setup for unit and e2e tests
+- 📏 **Code Quality**: ESLint + Prettier configuration
+- 🔧 **Environment Config**: Centralized configuration management
+- 📚 **API Versioning**: Built-in API versioning support
+- 🎨 **Modular Architecture**: Clean, maintainable code structure
+
+## 📁 Project Structure
+
+```
+src/
+├── common/                 # Shared utilities and configurations
+│   ├── base/              # Base classes (pagination, etc.)
+│   ├── config/            # Environment and app configuration
+│   ├── decorators/        # Custom decorators (roles, permissions, etc.)
+│   ├── exceptions/        # Custom exception classes
+│   ├── filters/           # Exception filters
+│   ├── guards/            # Custom guards
+│   ├── interceptors/      # Custom interceptors
+│   ├── logger/            # Winston logger configuration
+│   ├── pipes/             # Custom validation pipes
+│   └── utils/             # Utility functions (hashing, etc.)
+├── core/                  # Core application modules
+│   ├── auth/              # Authentication module
+│   │   ├── dto/           # Login/Signup DTOs
+│   │   ├── permissions/   # Permission system
+│   │   ├── roles/         # Role-based access control
+│   │   └── sessions/      # Session management
+│   └── database/          # Database configuration
+├── modules/               # Feature modules
+│   └── users/             # User management module
+├── generated/             # Prisma generated client
+└── main.ts               # Application entry point
+
+prisma/
+├── migrations/            # Database migrations
+├── schemas/              # Prisma schema files
+│   ├── schema.prisma     # Main schema configuration
+│   └── user.prisma       # User model definition
+├── seeders/              # Database seeders
+│   ├── data/             # Seed data files
+│   └── *.seeder.ts       # Seeder implementations
+└── sql/                  # Custom SQL files
 ```
 
-## Compile and run the project
+## 🛠️ Installation & Setup
+
+### Prerequisites
+
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **PostgreSQL** database
+
+### 1. Clone the Repository
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <repository-url>
+cd nestjs-fastify-prisma-starter
 ```
 
-## Run tests
+### 2. Install Dependencies
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+### 3. Environment Configuration
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Create a `.env` file in the root directory:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
+
+# Application
+PORT=3000
+NODE_ENV=DEV
+FRONTEND_URL=http://localhost:3000
+
+# Authentication
+JWT_SECRET_KEY=your-super-secret-jwt-key
+
+# Prisma (Optional)
+OPTIMIZE_API_KEY=your-prisma-optimize-key
+```
+
+### 4. Database Setup
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations
+npx prisma migrate dev
+
+# Seed the database with initial data
+npm run seed
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 5. Start the Application
 
-## Resources
+```bash
+# Development mode with hot reload
+npm run start:dev
 
-Check out a few resources that may come in handy when working with NestJS:
+# Production mode
+npm run start:prod
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Debug mode
+npm run start:debug
+```
 
-## Support
+The application will start on `http://localhost:3000` (or your configured PORT).
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🔐 Default Users
 
-## Stay in touch
+The seeder creates three default users for testing:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Role   | Email            | Username | Password   |
+| ------ | ---------------- | -------- | ---------- |
+| ADMIN  | admin@gmail.com  | admin    | Aa475869\* |
+| SELLER | amazon@gmail.com | amazon   | Aa475869\* |
+| BUYER  | it@gmail.com     | it       | Aa475869\* |
 
-## License
+## 📡 API Endpoints
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Authentication
+
+```
+POST /api/v1/auth/login     # User login
+POST /api/v1/auth/signup    # User registration
+```
+
+### Users
+
+```
+GET    /api/v1/users           # Get all users (Admin only)
+POST   /api/v1/users           # Create user (Admin only)
+GET    /api/v1/users/:id       # Get user by ID
+GET    /api/v1/users/profile   # Get current user profile
+PATCH  /api/v1/users/profile   # Update current user profile
+PATCH  /api/v1/users/:id       # Update user (Admin only)
+DELETE /api/v1/users/:id       # Delete user (Admin only)
+```
+
+### API Versioning
+
+All endpoints are versioned with `/api/v1/` prefix. You can create new versions by updating the version in your controllers.
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# Watch mode
+npm run test:watch
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+
+# Debug tests
+npm run test:debug
+```
+
+## 🔧 Development Commands
+
+```bash
+# Code formatting
+npm run format
+
+# Linting
+npm run lint
+
+# Build for production
+npm run build
+
+# Database operations
+npx prisma studio          # Open Prisma Studio
+npx prisma migrate reset    # Reset database
+npx prisma db push         # Push schema changes
+```
+
+## 🏗️ Architecture Decisions
+
+### Why Fastify over Express?
+
+- **Performance**: Up to 2x faster than Express
+- **Schema-based validation**: Built-in JSON schema validation
+- **Plugin architecture**: Modular and extensible
+- **TypeScript support**: First-class TypeScript support
+
+### Why Prisma?
+
+- **Type Safety**: Generated TypeScript types
+- **Developer Experience**: Intuitive API and great tooling
+- **Database Agnostic**: Easy to switch between databases
+- **Migration System**: Robust schema management
+
+### Security Features
+
+- **Helmet**: Security headers
+- **CORS**: Configurable cross-origin requests
+- **Rate Limiting**: Built-in request throttling
+- **Input Validation**: Comprehensive request validation
+- **JWT**: Secure authentication tokens
+
+## 🚀 Production Deployment
+
+### Environment Variables
+
+Ensure all required environment variables are set:
+
+- `DATABASE_URL`
+- `JWT_SECRET_KEY`
+- `NODE_ENV=PROD`
+- `PORT`
+
+### Performance Optimizations
+
+- Compression enabled (gzip/brotli)
+- Connection pooling configured
+- Graceful shutdown handling
+- Memory usage monitoring
+- Request timeout configuration
+
+### Recommended Deployment Platforms
+
+- **Railway**
+- **Heroku**
+- **DigitalOcean App Platform**
+- **AWS ECS/Lambda**
+- **Google Cloud Run**
+
+## 📚 Additional Resources
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Fastify Documentation](https://www.fastify.io/docs/)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the UNLICENSED License - see the package.json file for details.
+
+## 👨‍💻 Author
+
+**MohamedSa-dev**
+
+---
+
+## 🔮 Planned Features
+
+The project structure includes imports for additional modules that are planned for future implementation:
+
+- **Files Module**: File upload and management
+- **Products Module**: Product catalog management
+- **Stores Module**: Multi-tenant store system
+- **Payments Module**: Payment processing integration
+- **Activities Module**: User activity tracking and logging
+
+These modules are referenced in the main app module but not yet implemented, providing a roadmap for future development.
+
+---
+
+**Happy coding! 🎉**
