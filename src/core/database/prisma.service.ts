@@ -7,7 +7,7 @@ import { PrismaClient } from 'src/generated/client';
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
-  private readonly prisma: ReturnType<typeof PrismaService['createPrismaClient']>;
+  public readonly prisma: ReturnType<typeof PrismaService['createPrismaClient']>;
 
   constructor() {
     this.prisma = PrismaService.createPrismaClient();
@@ -28,10 +28,11 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
       },
     });
 
-    type clientType = typeof client;
-
-    if (isDev) {
-      client = client.$extends(withOptimize({ apiKey: settings.OPTIMIZE_API_KEY! })) as clientType;
+    
+    const optimizeApiKey = settings.OPTIMIZE_API_KEY
+    if (isDev && optimizeApiKey) {
+      type ClientType = typeof client;
+      client = client.$extends(withOptimize({ apiKey: optimizeApiKey })) as ClientType;
     }
 
     return client.$extends(withAccelerate());
@@ -43,9 +44,5 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
 
   async onModuleDestroy() {
     await this.prisma.$disconnect();
-  }
-
-  get client() {
-    return this.prisma;
   }
 }

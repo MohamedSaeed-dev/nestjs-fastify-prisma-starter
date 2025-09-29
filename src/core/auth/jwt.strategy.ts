@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
   async validate(payload: any) {
-    const user = await this.prismaService.client.user.findUnique({
+    const user = await this.prismaService.prisma.user.findUnique({
       cacheStrategy: {
         ttl: 60, // Cache for 1 minute
       },

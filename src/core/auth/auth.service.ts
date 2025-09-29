@@ -17,7 +17,7 @@ export class AuthService {
     private readonly prismaService: PrismaService,
   ) {}
   async login(loginDto: LoginDto) {
-    const user = await this.prismaService.client.user.findFirst({
+    const user = await this.prismaService.prisma.user.findFirst({
       where: {
         OR: [{ email: loginDto.email }, { username: loginDto.username }],
       },
@@ -33,7 +33,7 @@ export class AuthService {
       id: user.id,
       username: user.username,
     };
-    await this.prismaService.client.user.update({
+    await this.prismaService.prisma.user.update({
       where: { id: user.id },
       data: { lastLogin: dayjs().toDate() },
     });
@@ -43,7 +43,7 @@ export class AuthService {
     };
   }
   async signup(signupDto: SignupDto) {
-    const user = await this.prismaService.client.user.findFirst({
+    const user = await this.prismaService.prisma.user.findFirst({
       where: {
         OR: [{ email: signupDto.email }, { username: signupDto.username }],
       },
@@ -51,7 +51,7 @@ export class AuthService {
     });
     if (user) throw new ConflictException('User already exists');
     const hashedPassword = await Hashing.hash(signupDto.password);
-    const newUser = await this.prismaService.client.user.create({
+    const newUser = await this.prismaService.prisma.user.create({
       data: {
         ...signupDto,
         password: hashedPassword,

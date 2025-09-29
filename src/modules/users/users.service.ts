@@ -8,12 +8,12 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prismaService: PrismaService) { }
   create(createUserDto: CreateUserDto) {
     return `This action returns a user`;
   }
   async findAll(query: QueryUserDto) {
-    return await this.prisma.client.user.findMany({
+    return await this.prismaService.prisma.user.findMany({
       skip: (query.offset - 1) * query.limit,
       take: query.limit,
     });
@@ -24,7 +24,7 @@ export class UsersService {
   }
   async updateProfile(user: CurrentUserType, updateProfileDto: UpdateProfileDto) {
     const { oldPassword, newPassword, ...rest } = updateProfileDto;
-    const userExist = await this.prisma.client.user.findFirst({
+    const userExist = await this.prismaService.prisma.user.findFirst({
       where: {
         OR: [{ email: updateProfileDto.email }, { username: updateProfileDto.username }],
       },
@@ -36,7 +36,7 @@ export class UsersService {
       const hashedPassword = await Hashing.hash(newPassword);
       data.password = hashedPassword;
     }
-    const updatedUser = await this.prisma.client.user.update({
+    const updatedUser = await this.prismaService.prisma.user.update({
       where: { id: user.id },
       data: { ...data },
     });
