@@ -1,17 +1,16 @@
 import compress from '@fastify/compress';
 import helmet from '@fastify/helmet';
-import multipart from '@fastify/multipart';
 import { BadRequestException, Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { ValidationError, useContainer } from 'class-validator';
+import dayjs from 'dayjs';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { performance } from 'perf_hooks';
 import { AppModule } from './app.module';
 import settings from './common/config/configurations';
 import { NodeEnv } from './common/config/node.env';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import dayjs from 'dayjs';
 
 async function bootstrap(): Promise<void> {
   const logger = new Logger('Bootstrap');
@@ -20,17 +19,11 @@ async function bootstrap(): Promise<void> {
 
   try {
     const fastifyAdapter = createOptimizedFastifyAdapter(isProd);
-    const app = await NestFactory.create<NestFastifyApplication>(
-      AppModule,
-      fastifyAdapter,
-      {
-        logger: isProd
-          ? ['error', 'warn']
-          : ['log', 'debug', 'error', 'verbose', 'warn'],
-        abortOnError: isProd,
-        forceCloseConnections: true,
-      }
-    );
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule, fastifyAdapter, {
+      logger: isProd ? ['error', 'warn'] : ['log', 'debug', 'error', 'verbose', 'warn'],
+      abortOnError: isProd,
+      forceCloseConnections: true,
+    });
 
     useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
@@ -38,11 +31,7 @@ async function bootstrap(): Promise<void> {
     setupGlobalFilters(app);
     setupCors(app, isProd);
     setupVersioning(app);
-    await Promise.all([
-      setupSecurity(app, isProd),
-      setupCompression(app, isProd),
-      setupMultipart(app),
-    ]);
+    await Promise.all([setupSecurity(app, isProd), setupCompression(app, isProd)]);
 
     setupGracefulShutdown(app, logger);
 
@@ -58,7 +47,6 @@ async function bootstrap(): Promise<void> {
     logger.log(`🌍 Environment: ${settings.NODE_ENV}`);
     logger.log(`⚡ Boot time: ${bootTime}ms`);
     logger.log(`💾 Memory usage: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`);
-
   } catch (error) {
     logger.error('❌ Failed to start application:', error);
     process.exit(1);
@@ -68,9 +56,11 @@ async function bootstrap(): Promise<void> {
 function createOptimizedFastifyAdapter(isProd: boolean): FastifyAdapter {
   return new FastifyAdapter({
     trustProxy: true,
-    logger: isProd ? false : {
-      level: 'info',
-    },
+    logger: isProd
+      ? false
+      : {
+          level: 'info',
+        },
     caseSensitive: false,
     ignoreTrailingSlash: true,
     maxParamLength: 100,
@@ -124,9 +114,7 @@ async function setupSecurity(app: NestFastifyApplication, isProd: boolean): Prom
         styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
         fontSrc: ["'self'", 'fonts.gstatic.com'],
         imgSrc: ["'self'", 'data:', 'https:'],
-        scriptSrc: isProd
-          ? ["'self'"]
-          : ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        scriptSrc: isProd ? ["'self'"] : ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       },
     },
     crossOriginEmbedderPolicy: isProd,
@@ -172,18 +160,6 @@ function setupVersioning(app: NestFastifyApplication): void {
     prefix: 'v',
   });
   app.setGlobalPrefix('api');
-}
-
-async function setupMultipart(app: NestFastifyApplication): Promise<void> {
-  await app.register(multipart, {
-    throwFileSizeLimit: true,
-    limits: {
-      fileSize: 5 * 1024 * 1024,
-      files: 10,
-      fields: 50,
-      parts: 100,
-    },
-  });
 }
 
 function setupGracefulShutdown(app: NestFastifyApplication, logger: Logger) {

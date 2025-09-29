@@ -1,13 +1,28 @@
-# NestJS Fastify Prisma Starter
+# 🚀 NestJS Fastify Prisma Starter
 
-A high-performance, production-ready backend starter template built with **NestJS**, **Fastify**, and **Prisma**. This project provides a robust foundation for building scalable web applications with modern TypeScript architecture.
+A **high-performance**, **production-ready** backend starter template built with
+**NestJS**, **Fastify**, and **Prisma**. This project provides a robust
+foundation for building scalable web applications with modern TypeScript
+architecture and enhanced developer experience.
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-11.1+-red.svg)](https://nestjs.com/)
+[![Fastify](https://img.shields.io/badge/Fastify-4.x-black.svg)](https://www.fastify.io/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.15+-green.svg)](https://www.prisma.io/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+
+> ⭐ **Enhanced Version** - This starter template has been significantly
+> improved with advanced TypeScript configurations, comprehensive ESLint rules,
+> automated code formatting, Docker support, and professional VS Code settings.
 
 ## 🚀 Features
 
 ### Core Technologies
 
-- **[NestJS](https://nestjs.com/)** - Progressive Node.js framework with TypeScript support
-- **[Fastify](https://www.fastify.io/)** - Fast and low overhead web framework (alternative to Express)
+- **[NestJS](https://nestjs.com/)** - Progressive Node.js framework with
+  TypeScript support
+- **[Fastify](https://www.fastify.io/)** - Fast and low overhead web framework
+  (alternative to Express)
 - **[Prisma](https://www.prisma.io/)** - Next-generation ORM with type safety
 - **[PostgreSQL](https://www.postgresql.org/)** - Robust relational database
 
@@ -34,50 +49,76 @@ A high-performance, production-ready backend starter template built with **NestJ
 - 🌱 **Seeders**: Pre-populated test data
 - 📈 **Optimizations**: Prisma extensions for performance
 
-### Development Experience
+### Enhanced Development Experience ⭐
 
-- 🧪 **Testing**: Jest setup for unit and e2e tests
-- 📏 **Code Quality**: ESLint + Prettier configuration
-- 🔧 **Environment Config**: Centralized configuration management
+- 🧪 **Advanced Testing**: Jest with comprehensive configuration and coverage
+  reporting
+- 📏 **Strict Code Quality**: Enhanced ESLint rules with TypeScript safety
+- 🎨 **Auto Formatting**: Prettier with VS Code integration and save-on-format
+- 🔧 **Smart Environment Config**: Centralized configuration with validation
 - 📚 **API Versioning**: Built-in API versioning support
-- 🎨 **Modular Architecture**: Clean, maintainable code structure
+- 🏗️ **Professional Architecture**: Clean, maintainable, and scalable code
+  structure
+- 🐳 **Docker Ready**: Multi-stage builds for development and production
+- ⚡ **VS Code Integration**: Professional workspace settings and debugging
+- 🔍 **Import Management**: Automatic import sorting and unused import removal
+- 📝 **Path Aliases**: Clean imports with `@/` path mapping
 
 ## 📁 Project Structure
 
 ```
-src/
-├── common/                 # Shared utilities and configurations
-│   ├── base/              # Base classes (pagination, etc.)
-│   ├── config/            # Environment and app configuration
-│   ├── decorators/        # Custom decorators (roles, permissions, etc.)
-│   ├── exceptions/        # Custom exception classes
-│   ├── filters/           # Exception filters
-│   ├── guards/            # Custom guards
-│   ├── interceptors/      # Custom interceptors
-│   ├── logger/            # Winston logger configuration
-│   ├── pipes/             # Custom validation pipes
-│   └── utils/             # Utility functions (hashing, etc.)
-├── core/                  # Core application modules
-│   ├── auth/              # Authentication module
-│   │   ├── dto/           # Login/Signup DTOs
-│   │   ├── permissions/   # Permission system
-│   │   ├── roles/         # Role-based access control
-│   │   └── sessions/      # Session management
-│   └── database/          # Database configuration
-├── modules/               # Feature modules
-│   └── users/             # User management module
-├── generated/             # Prisma generated client
-└── main.ts               # Application entry point
-
-prisma/
-├── migrations/            # Database migrations
-├── schemas/              # Prisma schema files
-│   ├── schema.prisma     # Main schema configuration
-│   └── user.prisma       # User model definition
-├── seeders/              # Database seeders
-│   ├── data/             # Seed data files
-│   └── *.seeder.ts       # Seeder implementations
-└── sql/                  # Custom SQL files
+📁 Project Root
+├── 📁 .vscode/                    # VS Code workspace settings ⭐
+│   ├── settings.json             # Auto-format, import management
+│   ├── launch.json               # Debug configurations
+│   ├── tasks.json                # Build and dev tasks
+│   └── extensions.json           # Recommended extensions
+├── 📁 src/
+│   ├── 📁 common/                # Shared utilities and configurations
+│   │   ├── 📁 base/              # Base classes (pagination, etc.)
+│   │   ├── 📁 config/            # Environment and app configuration
+│   │   ├── 📁 decorators/        # Custom decorators (roles, permissions, etc.)
+│   │   ├── 📁 exceptions/        # Custom exception classes
+│   │   ├── 📁 filters/           # Exception filters with Prisma error handling
+│   │   ├── 📁 guards/            # Custom guards (fixed typo) ⭐
+│   │   ├── 📁 interceptors/      # Custom interceptors
+│   │   ├── 📁 logger/            # Winston logger configuration
+│   │   ├── 📁 pipes/             # Custom validation pipes
+│   │   └── 📁 utils/             # Utility functions (hashing, etc.)
+│   ├── 📁 core/                  # Core application modules
+│   │   ├── 📁 auth/              # Authentication module
+│   │   │   ├── 📁 dto/           # Login/Signup DTOs
+│   │   │   ├── 📁 permissions/   # Permission system
+│   │   │   ├── 📁 roles/         # Role-based access control
+│   │   │   └── 📁 sessions/      # Session management
+│   │   └── 📁 database/          # Database configuration
+│   ├── 📁 modules/               # Feature modules
+│   │   └── 📁 users/             # User management module
+│   ├── 📁 generated/             # Prisma generated client
+│   └── main.ts                   # Application entry point
+├── 📁 prisma/
+│   ├── 📁 migrations/            # Database migrations
+│   ├── 📁 schemas/              # Prisma schema files
+│   │   ├── schema.prisma         # Main schema configuration
+│   │   └── user.prisma           # User model definition
+│   ├── 📁 seeders/              # Database seeders
+│   │   ├── 📁 data/             # Seed data files
+│   │   └── *.seeder.ts           # Seeder implementations
+│   └── 📁 sql/                  # Custom SQL files
+├── 📁 test/                      # Test files and configurations
+├── 📄 .editorconfig             # Editor configuration ⭐
+├── 📄 .gitignore                # Enhanced git ignore rules ⭐
+├── 📄 .prettierrc               # Prettier formatting rules ⭐
+├── 📄 .prettierignore           # Prettier ignore patterns ⭐
+├── 📄 eslint.config.mjs         # Enhanced ESLint configuration ⭐
+├── 📄 tsconfig.json             # Strict TypeScript configuration ⭐
+├── 📄 jest.config.js            # Comprehensive Jest configuration ⭐
+├── 📄 Dockerfile                # Production Docker image ⭐
+├── 📄 Dockerfile.dev            # Development Docker image ⭐
+├── 📄 docker-compose.yml        # Production Docker setup ⭐
+├── 📄 docker-compose.dev.yml    # Development Docker setup ⭐
+├── 📄 env.example               # Environment variables template ⭐
+└── 📄 SETUP.md                  # Setup guide for enhancements ⭐
 ```
 
 ## 🛠️ Installation & Setup
@@ -99,25 +140,36 @@ cd nestjs-fastify-prisma-starter
 
 ```bash
 npm install
+
+# Install additional development dependencies for enhanced features ⭐
+npm install -D tsconfig-paths eslint-plugin-import jest-watch-typeahead
 ```
 
 ### 3. Environment Configuration
 
-Create a `.env` file in the root directory:
+Copy the example environment file and customize it:
+
+```bash
+# Copy the example environment file ⭐
+cp env.example .env
+```
+
+Edit the `.env` file with your configuration:
 
 ```env
-# Database
+# Database Configuration
 DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
 
-# Application
+# Application Configuration
 PORT=3000
-NODE_ENV=DEV
+NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 
-# Authentication
-JWT_SECRET_KEY=your-super-secret-jwt-key
+# JWT Configuration
+JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+JWT_EXPIRES_IN=7d
 
-# Prisma (Optional)
+# Optional: Prisma Optimize
 OPTIMIZE_API_KEY=your-prisma-optimize-key
 ```
 
@@ -149,15 +201,47 @@ npm run start:debug
 
 The application will start on `http://localhost:3000` (or your configured PORT).
 
+## ⚡ Quick Start Guide
+
+For experienced developers, here's the fastest way to get started:
+
+```bash
+# Clone and setup
+git clone <repository-url>
+cd nestjs-fastify-prisma-starter
+
+# Install dependencies (including enhanced dev tools)
+npm install
+npm install -D tsconfig-paths eslint-plugin-import jest-watch-typeahead
+
+# Setup environment
+cp env.example .env
+# Edit .env with your database URL and JWT secret
+
+# Database setup
+npx prisma generate
+npx prisma migrate dev
+npm run seed
+
+# Start development server
+npm run start:dev
+
+# Or use Docker for full environment
+docker-compose -f docker-compose.dev.yml up
+```
+
+**VS Code Users**: Install recommended extensions when prompted for the best
+experience!
+
 ## 🔐 Default Users
 
 The seeder creates three default users for testing:
 
-| Role   | Email            | Username | Password   |
-| ------ | ---------------- | -------- | ---------- |
-| ADMIN  | admin@gmail.com  | admin    | Aa475869\* |
-| SELLER | amazon@gmail.com | amazon   | Aa475869\* |
-| BUYER  | it@gmail.com     | it       | Aa475869\* |
+| Role   | Email            | Username | Password |
+| ------ | ---------------- | -------- | -------- |
+| ADMIN  | admin@gmail.com  | admin    | Bc123456 |
+| SELLER | amazon@gmail.com | amazon   | Bc123456 |
+| BUYER  | it@gmail.com     | it       | Bc123456 |
 
 ## 📡 API Endpoints
 
@@ -182,7 +266,8 @@ DELETE /api/v1/users/:id       # Delete user (Admin only)
 
 ### API Versioning
 
-All endpoints are versioned with `/api/v1/` prefix. You can create new versions by updating the version in your controllers.
+All endpoints are versioned with `/api/v1/` prefix. You can create new versions
+by updating the version in your controllers.
 
 ## 🧪 Testing
 
@@ -203,23 +288,114 @@ npm run test:cov
 npm run test:debug
 ```
 
-## 🔧 Development Commands
+## 🔧 Enhanced Development Commands ⭐
+
+### Code Quality & Formatting
 
 ```bash
-# Code formatting
+# Auto-format code with Prettier
 npm run format
 
-# Linting
+# Lint and fix code issues
 npm run lint
 
 # Build for production
 npm run build
 
-# Database operations
-npx prisma studio          # Open Prisma Studio
-npx prisma migrate reset    # Reset database
-npx prisma db push         # Push schema changes
+# Type checking
+npx tsc --noEmit
 ```
+
+### Database Operations
+
+```bash
+# Open Prisma Studio (Database GUI)
+npx prisma studio
+
+# Reset database with fresh migrations
+npx prisma migrate reset
+
+# Push schema changes without migrations
+npx prisma db push
+
+# Generate Prisma client after schema changes
+npx prisma generate
+
+# Run database seeders
+npm run seed
+```
+
+### Docker Development ⭐
+
+```bash
+# Start development environment with Docker
+docker-compose -f docker-compose.dev.yml up
+
+# Build and start production environment
+docker-compose up --build
+
+# Stop Docker services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+```
+
+### VS Code Integration ⭐
+
+- **Auto-format on save** - Code is automatically formatted when you save
+- **Auto-import organization** - Imports are sorted and unused ones removed
+- **Debug support** - Press `F5` to start debugging
+- **Task runner** - Use `Ctrl+Shift+P` → "Tasks: Run Task"
+
+## ⭐ What's New in This Enhanced Version
+
+This starter template has been significantly improved with professional
+development tools and configurations:
+
+### 🛠️ Enhanced Development Tools
+
+- **Strict TypeScript Configuration**: Enhanced type safety with strict mode
+  enabled
+- **Professional ESLint Rules**: Comprehensive linting with NestJS-specific
+  rules
+- **Advanced Prettier Setup**: Multi-format support with overrides for different
+  file types
+- **Import Management**: Automatic import sorting and unused import removal
+- **Path Aliases**: Clean imports using `@/` prefix for better code organization
+
+### 🐳 Docker Integration
+
+- **Multi-stage Production Builds**: Optimized Docker images for production
+- **Development Environment**: Hot-reload Docker setup with debugging support
+- **Database Services**: PostgreSQL and Redis containers with health checks
+- **Management Tools**: Adminer and Redis Commander for database management
+
+### ⚡ VS Code Professional Setup
+
+- **Workspace Configuration**: Auto-format, import management, and debugging
+- **Task Integration**: Build, test, and Docker tasks accessible via Command
+  Palette
+- **Extension Recommendations**: Curated list of essential VS Code extensions
+- **Debug Configurations**: Ready-to-use debug setups for app and tests
+
+### 🔧 Configuration Improvements
+
+- **Environment Template**: Comprehensive `.env.example` with all configuration
+  options
+- **Git Integration**: Enhanced `.gitignore` with comprehensive exclusions
+- **Editor Config**: Consistent coding standards across different editors
+- **Jest Configuration**: Advanced testing setup with coverage and path mapping
+
+### 🚀 Developer Experience
+
+- **Auto-format on Save**: Code is automatically formatted when you save files
+- **Import Organization**: Unused imports are removed and remaining ones are
+  sorted
+- **Type Safety**: Strict TypeScript configuration catches more errors at
+  compile time
+- **Error Handling**: Comprehensive Prisma error handling with user-friendly
+  messages
 
 ## 🏗️ Architecture Decisions
 
@@ -274,10 +450,40 @@ Ensure all required environment variables are set:
 
 ## 📚 Additional Resources
 
-- [NestJS Documentation](https://docs.nestjs.com)
-- [Fastify Documentation](https://www.fastify.io/docs/)
-- [Prisma Documentation](https://www.prisma.io/docs)
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+### Official Documentation
+
+- [NestJS Documentation](https://docs.nestjs.com) - Framework documentation
+- [Fastify Documentation](https://www.fastify.io/docs/) - High-performance web
+  framework
+- [Prisma Documentation](https://www.prisma.io/docs) - Database toolkit and ORM
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/) - Database
+  documentation
+
+### Development Tools
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/) - TypeScript
+  language reference
+- [ESLint Rules](https://eslint.org/docs/rules/) - Code linting rules
+- [Prettier Configuration](https://prettier.io/docs/en/configuration.html) -
+  Code formatting
+- [Jest Documentation](https://jestjs.io/docs/getting-started) - Testing
+  framework
+
+### Deployment & DevOps
+
+- [Docker Documentation](https://docs.docker.com/) - Containerization
+- [Docker Compose](https://docs.docker.com/compose/) - Multi-container
+  applications
+- [VS Code Extensions](https://marketplace.visualstudio.com/vscode) - Editor
+  extensions
+
+### Enhanced Features Guide
+
+- [SETUP.md](./SETUP.md) - Detailed setup guide for all enhancements
+- [Path Mapping Guide](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping) -
+  TypeScript path aliases
+- [ESLint TypeScript Rules](https://typescript-eslint.io/rules/) -
+  TypeScript-specific linting
 
 ## 🤝 Contributing
 
@@ -289,7 +495,8 @@ Ensure all required environment variables are set:
 
 ## 📄 License
 
-This project is licensed under the UNLICENSED License - see the package.json file for details.
+This project is licensed under the UNLICENSED License - see the package.json
+file for details.
 
 ## 👨‍💻 Author
 

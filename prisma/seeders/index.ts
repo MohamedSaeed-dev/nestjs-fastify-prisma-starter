@@ -1,11 +1,11 @@
-import { PrismaClient } from "../../src/generated/client";
-import { usersSeeder } from "./users.seeder";
+import { PrismaClient } from '../../src/generated/client';
+import { usersSeeder } from './users.seeder';
 const prisma = new PrismaClient();
 async function seeder() {
   await usersSeeder(prisma);
 }
 seeder()
-  .catch((e) => {
+  .catch(e => {
     console.error('❌ Error seeding:', e);
     process.exit(1);
   })

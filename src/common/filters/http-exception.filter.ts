@@ -23,7 +23,7 @@ import { NodeEnv } from '../config/node.env';
 import { TooManyRequestsException } from '../exceptions/too-many-requests.exception';
 import { ErrorResponse, PrismaErrorResult } from './prisma-errors.interface';
 import dayjs from 'dayjs';
-import { prismaErrorMap } from './prisma-error-codes';
+import { PrismaErrorCode, prismaErrorMap } from './prisma-error-codes';
 
 /**
  * Enhanced Prisma Exception Filter combining comprehensive error handling
@@ -41,9 +41,7 @@ import { prismaErrorMap } from './prisma-error-codes';
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
-  constructor(
-    @Inject(WINSTON_MODULE_PROVIDER) private readonly winstonLogger: WinstonLogger,
-  ) { }
+  constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly winstonLogger: WinstonLogger) {}
 
   async catch(exception: any, host: ArgumentsHost): Promise<void> {
     const ctx = host.switchToHttp();
@@ -111,7 +109,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let status = HttpStatus.BAD_REQUEST;
     let message = exception.message;
     let errors: Record<string, string[]> = {};
-    const code = exception.code;
+    const code = exception.code as PrismaErrorCode;
     const details = {
       originalMessage: exception.message,
       meta: exception.meta,
@@ -160,11 +158,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
   /**
    * Handle Prisma client initialization errors
    */
-  private handlePrismaInitializationError(exception: PrismaClientInitializationError): PrismaErrorResult {
+  private handlePrismaInitializationError(
+    exception: PrismaClientInitializationError,
+  ): PrismaErrorResult {
     return {
       status: HttpStatus.SERVICE_UNAVAILABLE,
       message: 'Database service temporarily unavailable',
-      errors: { initialization: ['Database client initialization failed. Please try again later.'] },
+      errors: {
+        initialization: ['Database client initialization failed. Please try again later.'],
+      },
       details: {
         type: 'PrismaClientInitializationError',
         errorCode: exception.errorCode,
@@ -237,14 +239,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     return {
       status: HttpStatus.INTERNAL_SERVER_ERROR,
       message: exception.message,
-      errors:{ server: [exception.message], stack: exception.stack?.split('\n') || [] },
+      errors: { server: [exception.message], stack: exception.stack?.split('\n') || [] },
     };
   }
 
   /**
    * Format validation errors from class-validator
    */
-  private async formatValidationErrors(errors: ValidationError[]): Promise<Record<string, string[]>> {
+  private async formatValidationErrors(
+    errors: ValidationError[],
+  ): Promise<Record<string, string[]>> {
     const formatted: Record<string, string[]> = {};
 
     for (const error of errors) {
@@ -262,8 +266,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     return formatted;
   }
-
-
 
   /**
    * Sanitize validation error messages to remove sensitive information
@@ -304,7 +306,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const sanitizeObject = (obj: any, prefix = ''): any => {
       if (!obj || typeof obj !== 'object') return obj;
 
-      const result = Array.isArray(obj) ? [] : {};
+      const result: any = Array.isArray(obj) ? [] : {};
 
       for (const [key, value] of Object.entries(obj)) {
         const fullKey = prefix ? `${prefix}.${key}` : key;
@@ -376,20 +378,31 @@ export class HttpExceptionFilter implements ExceptionFilter {
       }),
 
       // Include request body for client errors (sanitized)
-      ...(status >= 400 && status < 500 && {
-        body: this.sanitizeRequestBody(request.body),
-        query: request.query,
-        params: request.params,
-      }),
+      ...(status >= 400 &&
+        status < 500 && {
+          body: this.sanitizeRequestBody(request.body),
+          query: request.query,
+          params: request.params,
+        }),
 
       // Additional Prisma-specific context
       ...(exception.meta && { meta: exception.meta }),
     };
 
     // Log using both NestJS logger and Winston
-    this.logger[logLevel](message, logData);
-
-    this.winstonLogger[logLevel](message, logData);
+    switch (logLevel) {
+      case 'error':
+        this.logger.error(message, logData);
+        this.winstonLogger.error(message, logData);
+        break;
+      case 'warn':
+        this.logger.warn(message, logData);
+        this.winstonLogger.warn(message, logData);
+        break;
+      default:
+        this.logger.log(message, logData);
+        this.winstonLogger.info(message, logData);
+    }
 
     // Additional monitoring/alerting for critical errors
     if (status >= 500) {

@@ -36,7 +36,7 @@ import { RolesGuard } from './roles/role.guard';
       isGlobal: true,
     }),
     JwtModule.register({
-      secret: settings.JWT_SECRET_KEY,
+      secret: settings.JWT_SECRET_KEY!,
       signOptions: { expiresIn: '7d' },
     }),
   ],

@@ -19,7 +19,7 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     let client = new PrismaClient({
       log: isDev ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
       errorFormat: 'pretty',
-      datasourceUrl: settings.DATABASE_URL,
+      datasourceUrl: settings.DATABASE_URL!,
       omit: {
         user: {
           password: true,

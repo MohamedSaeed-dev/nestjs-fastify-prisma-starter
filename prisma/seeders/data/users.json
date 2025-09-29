@@ -1,20 +1,20 @@
 [
-    {
-        "username": "admin",
-        "email": "admin@gmail.com",
-        "password": "Aa475869*",
-        "role": "ADMIN"
-    },
-    {
-        "username": "amazon",
-        "email": "amazon@gmail.com",
-        "password": "Aa475869*",
-        "role": "SELLER"
-    },
-    {
-        "username": "it",
-        "email": "it@gmail.com",
-        "password": "Aa475869*",
-        "role": "BUYER"
-    }
+  {
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "password": "Bc123456",
+    "role": "ADMIN"
+  },
+  {
+    "username": "amazon",
+    "email": "amazon@gmail.com",
+    "password": "Bc123456",
+    "role": "SELLER"
+  },
+  {
+    "username": "it",
+    "email": "it@gmail.com",
+    "password": "Bc123456",
+    "role": "BUYER"
+  }
 ]
