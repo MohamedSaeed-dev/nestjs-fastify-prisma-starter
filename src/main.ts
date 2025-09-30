@@ -8,14 +8,14 @@ import dayjs from 'dayjs';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { performance } from 'perf_hooks';
 import { AppModule } from './app.module';
-import settings from './common/config/configurations';
-import { NodeEnv } from './common/config/node.env';
+import settings from './common/config/index';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { isProduction } from './common/utils/is-environment.util';
 
 async function bootstrap(): Promise<void> {
   const logger = new Logger('Bootstrap');
   const startTime = performance.now();
-  const isProd = settings.NODE_ENV === NodeEnv.PROD;
+  const isProd = isProduction();
 
   try {
     const fastifyAdapter = createOptimizedFastifyAdapter(isProd);

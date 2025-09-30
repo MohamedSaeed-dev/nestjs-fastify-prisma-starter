@@ -1,20 +1,20 @@
+import { isDevelopment } from '@/src/common/utils/is-environment.util';
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { withOptimize } from '@prisma/extension-optimize';
-import settings from 'src/common/config/configurations';
-import { NodeEnv } from 'src/common/config/node.env';
+import settings from 'src/common/config/index';
 import { PrismaClient } from 'src/generated/client';
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
-  public readonly prisma: ReturnType<typeof PrismaService['createPrismaClient']>;
+  public readonly prisma: ReturnType<(typeof PrismaService)['createPrismaClient']>;
 
   constructor() {
     this.prisma = PrismaService.createPrismaClient();
   }
 
   private static createPrismaClient() {
-    const isDev = settings.NODE_ENV === NodeEnv.DEV;
+    const isDev = isDevelopment();
 
     let client = new PrismaClient({
       log: isDev ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
@@ -28,8 +28,7 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
       },
     });
 
-    
-    const optimizeApiKey = settings.OPTIMIZE_API_KEY
+    const optimizeApiKey = settings.OPTIMIZE_API_KEY;
     if (isDev && optimizeApiKey) {
       type ClientType = typeof client;
       client = client.$extends(withOptimize({ apiKey: optimizeApiKey })) as ClientType;

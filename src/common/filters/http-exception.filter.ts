@@ -16,14 +16,14 @@ import {
   PrismaClientValidationError,
 } from '@prisma/client/runtime/library';
 import { ValidationError } from 'class-validator';
+import dayjs from 'dayjs';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger as WinstonLogger } from 'winston';
-import { NodeEnv } from '../config/node.env';
 import { TooManyRequestsException } from '../exceptions/too-many-requests.exception';
-import { ErrorResponse, PrismaErrorResult } from './prisma-errors.interface';
-import dayjs from 'dayjs';
+import { isProduction } from '../utils/is-environment.util';
 import { PrismaErrorCode, prismaErrorMap } from './prisma-error-codes';
+import { ErrorResponse, PrismaErrorResult } from './prisma-errors.interface';
 
 /**
  * Enhanced Prisma Exception Filter combining comprehensive error handling
@@ -48,7 +48,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<FastifyRequest>();
     const reply = ctx.getResponse<FastifyReply>();
 
-    const isProd = process.env.NODE_ENV === NodeEnv.PROD;
+    const isProd = isProduction();
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = exception.message;
     let errors: Record<string, string[] | undefined> = {};

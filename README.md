@@ -15,6 +15,44 @@ architecture and enhanced developer experience.
 > improved with advanced TypeScript configurations, comprehensive ESLint rules,
 > automated code formatting, Docker support, and professional VS Code settings.
 
+## 🆕 Latest Updates (September 2024) ⭐
+
+### 🔧 Configuration Enhancements
+
+- **Zod Schema Validation**: Robust environment variable validation with
+  detailed error reporting
+- **Smart Configuration System**: Type-safe configuration with comprehensive
+  validation rules
+- **Enhanced JWT Security**: Minimum 32-character secret key requirement with
+  regex validation
+
+### 🚀 Performance & Monitoring
+
+- **Optimized Fastify Adapter**: Advanced configurations for production-grade
+  performance
+- **Real-time Monitoring**: Boot time tracking and memory usage monitoring
+- **Smart Compression**: Environment-aware compression with adaptive
+  optimization levels
+- **Graceful Shutdown**: Proper application lifecycle management with signal
+  handling
+
+### 🛡️ Security Improvements
+
+- **Advanced Helmet Configuration**: Enhanced CSP policies and security headers
+- **Environment-aware CORS**: Smart origin validation with
+  development/production modes
+- **Client Error Handling**: Robust error handling for malformed requests
+- **Enhanced Input Validation**: Comprehensive validation with detailed error
+  formatting
+
+### 🐳 Docker & Infrastructure
+
+- **Enhanced PostgreSQL**: PostgreSQL 15-Alpine with health checks and
+  optimizations
+- **Service Orchestration**: Smart dependency management and network isolation
+- **Development Profiles**: Separate configurations for development and
+  production environments
+
 ## 🚀 Features
 
 ### Core Technologies
@@ -28,12 +66,19 @@ architecture and enhanced developer experience.
 
 ### Architecture & Performance
 
-- ⚡ **High Performance**: Fastify adapter for superior performance over Express
-- 🔒 **Security First**: Helmet, CORS, CSP, and security best practices
-- 📦 **Compression**: Built-in gzip/brotli compression
+- ⚡ **High Performance**: Optimized Fastify adapter with advanced
+  configurations ⭐
+- 🔒 **Security First**: Enhanced Helmet, CORS, CSP, and security best practices
+- 📦 **Smart Compression**: Adaptive gzip/brotli compression with
+  environment-based optimization ⭐
 - 🎯 **Type Safety**: Full TypeScript support with Prisma generated types
 - 🔄 **Hot Reload**: Development mode with automatic restart
-- 📊 **Logging**: Winston logger integration with structured logging
+- 📊 **Advanced Logging**: Winston logger with structured logging and
+  performance metrics ⭐
+- ⏱️ **Request Optimization**: Configurable timeouts, connection pooling, and
+  graceful shutdown ⭐
+- 💾 **Memory Management**: Real-time memory usage monitoring and optimization
+  ⭐
 
 ### Authentication & Authorization
 
@@ -55,14 +100,19 @@ architecture and enhanced developer experience.
   reporting
 - 📏 **Strict Code Quality**: Enhanced ESLint rules with TypeScript safety
 - 🎨 **Auto Formatting**: Prettier with VS Code integration and save-on-format
-- 🔧 **Smart Environment Config**: Centralized configuration with validation
+- 🔧 **Smart Environment Config**: Centralized configuration with **Zod
+  validation** ⭐
 - 📚 **API Versioning**: Built-in API versioning support
 - 🏗️ **Professional Architecture**: Clean, maintainable, and scalable code
   structure
-- 🐳 **Docker Ready**: Multi-stage builds for development and production
+- 🐳 **Docker Ready**: Multi-stage builds for development and production with
+  **Redis integration** ⭐
 - ⚡ **VS Code Integration**: Professional workspace settings and debugging
 - 🔍 **Import Management**: Automatic import sorting and unused import removal
 - 📝 **Path Aliases**: Clean imports with `@/` path mapping
+- 🚀 **Performance Monitoring**: Real-time boot time and memory usage tracking
+  ⭐
+- 🛡️ **Enhanced Security**: Advanced Helmet configuration with CSP policies ⭐
 
 ## 📁 Project Structure
 
@@ -165,8 +215,9 @@ PORT=3000
 NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 
-# JWT Configuration
-JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+# JWT Configuration (Enhanced Security) ⭐
+# Note: JWT_SECRET_KEY must be at least 32 characters long
+JWT_SECRET_KEY=your-super-secret-jwt-key-that-is-at-least-32-characters-long-change-this-in-production
 JWT_EXPIRES_IN=7d
 
 # Optional: Prisma Optimize
@@ -214,19 +265,19 @@ cd nestjs-fastify-prisma-starter
 npm install
 npm install -D tsconfig-paths eslint-plugin-import jest-watch-typeahead
 
-# Setup environment
+# Setup environment with enhanced configuration ⭐
 cp env.example .env
-# Edit .env with your database URL and JWT secret
+# Edit .env with your database URL, JWT secret (min 32 chars)
 
 # Database setup
 npx prisma generate
 npx prisma migrate dev
 npm run seed
 
-# Start development server
+# Start development server with monitoring ⭐
 npm run start:dev
 
-# Or use Docker for full environment
+# Or use Docker for full environment ⭐
 docker-compose -f docker-compose.dev.yml up
 ```
 
@@ -364,12 +415,21 @@ development tools and configurations:
 - **Import Management**: Automatic import sorting and unused import removal
 - **Path Aliases**: Clean imports using `@/` prefix for better code organization
 
-### 🐳 Docker Integration
+### 🐳 Docker Integration ⭐
 
 - **Multi-stage Production Builds**: Optimized Docker images for production
 - **Development Environment**: Hot-reload Docker setup with debugging support
-- **Database Services**: PostgreSQL and Redis containers with health checks
-- **Management Tools**: Adminer and Redis Commander for database management
+- **Enhanced Database Services**: PostgreSQL 15-Alpine with health checks and
+  data persistence ⭐
+- **Redis Integration**: Redis 7-Alpine with data persistence and optimized
+  configuration ⭐
+- **Management Tools**: Adminer for database management with development
+  profiles ⭐
+- **Network Isolation**: Secure app-network with bridge driver for service
+  communication ⭐
+- **Volume Management**: Persistent data storage for PostgreSQL, Redis, logs,
+  and uploads ⭐
+- **Service Dependencies**: Smart dependency management with health checks ⭐
 
 ### ⚡ VS Code Professional Setup
 
@@ -413,13 +473,21 @@ development tools and configurations:
 - **Database Agnostic**: Easy to switch between databases
 - **Migration System**: Robust schema management
 
-### Security Features
+### Security Features ⭐
 
-- **Helmet**: Security headers
-- **CORS**: Configurable cross-origin requests
-- **Rate Limiting**: Built-in request throttling
-- **Input Validation**: Comprehensive request validation
-- **JWT**: Secure authentication tokens
+- **Advanced Helmet Configuration**: Enhanced security headers with CSP policies
+  ⭐
+- **Smart CORS**: Environment-aware cross-origin configuration with whitelist
+  support ⭐
+- **Rate Limiting**: Built-in request throttling with configurable limits
+- **Input Validation**: Comprehensive request validation with Zod schema
+  validation ⭐
+- **JWT Security**: Enhanced JWT tokens with configurable expiration and strong
+  secret validation ⭐
+- **Client Error Handling**: Robust error handling for malformed requests ⭐
+- **Environment-Based Security**: Different security levels for development and
+  production ⭐
+- **XSS Protection**: Built-in XSS filtering and frame protection ⭐
 
 ## 🚀 Production Deployment
 
@@ -432,13 +500,19 @@ Ensure all required environment variables are set:
 - `NODE_ENV=PROD`
 - `PORT`
 
-### Performance Optimizations
+### Performance Optimizations ⭐
 
-- Compression enabled (gzip/brotli)
-- Connection pooling configured
-- Graceful shutdown handling
-- Memory usage monitoring
-- Request timeout configuration
+- **Smart Compression**: Environment-aware gzip/brotli compression with adaptive
+  levels ⭐
+- **Connection Pooling**: Optimized database connection management
+- **Graceful Shutdown**: Enhanced shutdown handling with proper signal
+  management ⭐
+- **Real-time Monitoring**: Boot time tracking and memory usage monitoring ⭐
+- **Request Optimization**: Configurable timeouts, keep-alive, and body limits
+  ⭐
+- **Client Error Handling**: Robust error handling for malformed requests ⭐
+- **Performance Metrics**: Detailed logging of application performance
+  statistics ⭐
 
 ### Recommended Deployment Platforms
 
@@ -504,4 +578,4 @@ file for details.
 
 ---
 
-**Happy coding! 🎉**
+**Last Updated: September 2025** ⭐ **Happy coding! 🎉**
